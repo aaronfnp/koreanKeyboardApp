@@ -1,7 +1,7 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
-import koreanKeyMap from "./components/koreanKeyMap";
+import koreanKeyMap from "./utilities/koreanKeyMap";
+import * as Hangul from "hangul-js";
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -11,17 +11,32 @@ function App() {
     setInputText(e.target.value);
   }
 
-  function handleTranslate(e) {}
+  const translateText = useCallback(() => {
+    let newText = inputText
+      .split("")
+      .map((char) => koreanKeyMap[char] || char)
+      .join("");
+    newText = Hangul.assemble(newText.split(""));
+    setOutputText(newText);
+  }, [inputText]);
+
+  useEffect(() => {
+    translateText();
+  }, [inputText]);
 
   return (
     <div className="App">
       <div>
         <h1>Korean Keyboard</h1>
         <label>Input</label>
-        <input value={inputText} onChange={handleChange} />
+        <input
+          value={inputText}
+          onChange={handleChange}
+          placeholder="Type in English"
+        />
         <div>{inputText}</div>
         <label>Output</label>
-        <input value={outputText} />
+        <input value={outputText} readOnly />
       </div>
     </div>
   );
