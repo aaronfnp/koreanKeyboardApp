@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import koreanKeyMap from "./utilities/koreanKeyMap";
 import * as Hangul from "hangul-js";
+import Keyboard from "./components/keyboard";
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -38,6 +39,7 @@ function App() {
         <label>Output</label>
         <input value={outputText} readOnly />
       </div>
+      <Keyboard />
     </div>
   );
 }
