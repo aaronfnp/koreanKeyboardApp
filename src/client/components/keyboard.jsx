@@ -5,11 +5,17 @@ import keyboard from "../utilities/koreanKeyMap";
 export default function Keyboard() {
   return (
     <div id="keyboard">
-      {keyboard.map((key, index) => (
-        <div key={key.index} className="key">
-          {key.hangul || key.key}
-        </div>
-      ))}
+      {keyboard.map((key) =>
+        key.hangul ? (
+          <div key={key.index} className="key">
+            {key.hangul}
+          </div>
+        ) : (
+          <div key={key.index} className="key">
+            {key.key}
+          </div>
+        )
+      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import "./App.css";
-import koreanKeyMap from "./utilities/koreanKeyMap";
+import keyboard from "./utilities/koreanKeyMap";
 import * as Hangul from "hangul-js";
 import Keyboard from "./components/keyboard";
 
@@ -15,8 +15,12 @@ function App() {
   const translateText = useCallback(() => {
     let newText = inputText
       .split("")
-      .map((char) => koreanKeyMap[char] || char)
+      .map((char) => {
+        const keyToTranslate = keyboard.find((item) => item.key === char);
+        return keyToTranslate?.hangul || char;
+      })
       .join("");
+
     newText = Hangul.assemble(newText.split(""));
     setOutputText(newText);
   }, [inputText]);
