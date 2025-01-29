@@ -1,18 +1,28 @@
 #keyboard {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(15, 2rem);
+  grid-gap: 1rem;
   padding: 1rem;
   justify-content: center;
+  justify-items: center;
 }
 
 .key {
   border: 1px solid black;
   width: 2rem;
   height: 2rem;
-
   display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
   text-align: center;
+}
+
+.key-space {
+  grid-column: span 5;
+  width: 10rem;
+}
+
+.key-shift {
+  grid-column: span 2;
+  width: 4rem;
 }
