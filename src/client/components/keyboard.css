@@ -8,6 +8,7 @@
 }
 
 .key {
+  position: relative;
   border: 1px solid black;
   width: 2rem;
   height: 2rem;
@@ -17,12 +18,13 @@
   text-align: center;
 }
 
-.key-space {
-  grid-column: span 5;
-  width: 10rem;
+.mainKey {
+  font-size: 20px;
 }
 
-.key-shift {
-  grid-column: span 2;
-  width: 4rem;
+.altKey {
+  font-size: 10px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
 }

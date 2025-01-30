@@ -7,6 +7,7 @@ import Keyboard from "./components/keyboard";
 function App() {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
+  const [isShifted, setIsShifted] = useState(false);
 
   function handleChange(e) {
     setInputText(e.target.value);
@@ -39,11 +40,10 @@ function App() {
           onChange={handleChange}
           placeholder="Type in English"
         />
-        <div>{inputText}</div>
         <label>Output</label>
         <input value={outputText} readOnly />
       </div>
-      <Keyboard />
+      <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} />
     </div>
   );
 }

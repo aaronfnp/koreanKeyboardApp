@@ -8,11 +8,12 @@ export default function Keyboard() {
       {keyboard.map((key) =>
         key.hangul ? (
           <div key={key.index} className="key">
-            {key.hangul}
+            <div className="altKey">{key.key}</div>
+            <div className="mainKey">{key.hangul}</div>
           </div>
         ) : (
           <div key={key.index} className="key">
-            {key.key}
+            {key.hangul}
           </div>
         )
       )}
