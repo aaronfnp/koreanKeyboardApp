@@ -1,50 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Keyboard.css";
 import keyboard from "../utilities/koreanKeyMap";
-import { useEffect } from "react";
 
 export default function Keyboard({ isShifted, setIsShifted }) {
+  const [isCapsLockOn, setIsCapsLockOn] = useState(false);
+
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Shift") {
-        setIsShifted(true);
-      }
-      if (e.key === "CapsLock") {
-        setIsShifted((prev) => !prev);
-      }
+    const handleKeyEvent = (e) => {
+      setIsCapsLockOn(e.getModifierState("CapsLock"));
+      if (e.key === "Shift") setIsShifted(e.type === "keydown");
     };
 
-    const handleKeyUp = (e) => {
-      if (e.key === "Shift") {
-        setIsShifted(false);
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("keyup", handleKeyUp);
+    document.addEventListener("keydown", handleKeyEvent);
+    document.addEventListener("keyup", handleKeyEvent);
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("keyup", handleKeyUp);
+      document.removeEventListener("keydown", handleKeyEvent);
+      document.removeEventListener("keyup", handleKeyEvent);
     };
-  }, []);
+  }, [setIsShifted]);
+
+  const isUppercaseMode = isShifted || isCapsLockOn;
 
   return (
     <div id="keyboard">
-      {keyboard.map((key) =>
-        isShifted && key.hangulCap ? (
-          <div key={key.index} className="key">
-            <div className="altKey">{key.upperCase}</div>
-            <div className="mainKey">{key.hangulCap}</div>
+      {keyboard.map((key) => (
+        <div key={key.lowerCase} className="key">
+          <div className="altKey">
+            {isUppercaseMode ? key.upperCase : key.lowerCase}
           </div>
-        ) : (
-          <div key={key.index} className="key">
-            <div className="altKey">{key.lowerCase}</div>
-            <div className="mainKey">{key.hangul}</div>
+          <div className="mainKey">
+            {isUppercaseMode ? key.hangulCap || key.hangul : key.hangul}
           </div>
-        )
-      )}
-      {isShifted ? <div>Shifted</div> : <div>Not Shifted</div>}
+        </div>
+      ))}
+      <div>{isUppercaseMode ? "Uppercase Mode" : "Lowercase Mode"}</div>
     </div>
   );
 }
