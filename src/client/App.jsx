@@ -40,19 +40,22 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <h1>Korean Keyboard</h1>
+      <h1>Korean Keyboard</h1>
+      <div className="input-container">
         <label>Input</label>
-        <div>{inputText}</div>
         <input
           value={inputText}
           onChange={handleChange}
           placeholder="Type in English"
         />
-        <label>Output</label>
-        <textarea value={outputText} readOnly />
       </div>
-      <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} />
+      <div className="output-container">
+        <label>Output</label>
+        <textarea value={outputText} placeholder="Translation here" readOnly />
+      </div>
+      <div className="keyboard-container">
+        <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} />
+      </div>
     </div>
   );
 }
