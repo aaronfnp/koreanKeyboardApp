@@ -17,8 +17,16 @@ function App() {
     let newText = inputText
       .split("")
       .map((char) => {
-        const keyToTranslate = keyboard.find((item) => item.key === char);
-        return keyToTranslate?.hangul || char;
+        const keyToTranslate = keyboard.find(
+          (item) => item.lowerCase === char.toLowerCase()
+        );
+
+        if (!keyToTranslate) return char;
+
+        const isUpperCase = char === char.toUpperCase();
+        return isUpperCase
+          ? keyToTranslate.hangulCap || keyToTranslate.hangul
+          : keyToTranslate.hangul;
       })
       .join("");
 
@@ -35,13 +43,14 @@ function App() {
       <div>
         <h1>Korean Keyboard</h1>
         <label>Input</label>
+        <div>{inputText}</div>
         <input
           value={inputText}
           onChange={handleChange}
           placeholder="Type in English"
         />
         <label>Output</label>
-        <input value={outputText} readOnly />
+        <textarea value={outputText} readOnly />
       </div>
       <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} />
     </div>
