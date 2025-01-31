@@ -18,7 +18,6 @@ const keyboard = [
   { lowerCase: "j", upperCase: "J", hangul: "ㅓ" },
   { lowerCase: "k", upperCase: "K", hangul: "ㅏ" },
   { lowerCase: "l", upperCase: "L", hangul: "ㅣ" },
-  { key: "FORMATTING" },
   { lowerCase: "z", upperCase: "Z", hangul: "ㅋ" },
   { lowerCase: "x", upperCase: "X", hangul: "ㅌ" },
   { lowerCase: "c", upperCase: "C", hangul: "ㅊ" },
@@ -26,9 +25,6 @@ const keyboard = [
   { lowerCase: "b", upperCase: "B", hangul: "ㅠ" },
   { lowerCase: "n", upperCase: "N", hangul: "ㅜ" },
   { lowerCase: "m", upperCase: "M", hangul: "ㅡ" },
-  { key: "FORMATTING" },
-  { key: "FORMATTING" },
-  { key: "FORMATTING" },
 ];
 
 export default keyboard;

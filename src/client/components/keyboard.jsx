@@ -24,17 +24,49 @@ export default function Keyboard({ isShifted, setIsShifted }) {
 
   return (
     <div id="keyboard">
-      {keyboard.map((key) => (
-        <div key={key.lowerCase} className="key">
-          <div className="altKey">
-            {isUppercaseMode ? key.upperCase : key.lowerCase}
-          </div>
-          <div className="mainKey">
-            {isUppercaseMode ? key.hangulCap || key.hangul : key.hangul}
-          </div>
-        </div>
-      ))}
-      <div>{isUppercaseMode ? "Uppercase Mode" : "Lowercase Mode"}</div>
+      <div className="row">
+        {keyboard.slice(0, 10).map((key) => (
+          <Key
+            key={key.lowerCase}
+            keyData={key}
+            isUppercaseMode={isUppercaseMode}
+          />
+        ))}
+      </div>
+      <div className="row">
+        {keyboard.slice(10, 19).map((key) => (
+          <Key
+            key={key.lowerCase}
+            keyData={key}
+            isUppercaseMode={isUppercaseMode}
+          />
+        ))}
+      </div>
+      <div className="row">
+        {keyboard.slice(19).map((key) => (
+          <Key
+            key={key.lowerCase}
+            keyData={key}
+            isUppercaseMode={isUppercaseMode}
+          />
+        ))}
+      </div>
+      <div className="mode">
+        {isUppercaseMode ? "Uppercase Mode" : "Lowercase Mode"}
+      </div>
     </div>
   );
 }
+
+const Key = ({ keyData, isUppercaseMode }) => {
+  return (
+    <div className="key">
+      <div className="altKey">
+        {isUppercaseMode ? keyData.upperCase : keyData.lowerCase}
+      </div>
+      <div className="mainKey">
+        {isUppercaseMode ? keyData.hangulCap || keyData.hangul : keyData.hangul}
+      </div>
+    </div>
+  );
+};
