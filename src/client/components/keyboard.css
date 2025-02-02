@@ -27,6 +27,12 @@
   border-radius: 5px;
 }
 
+.key.active {
+  background-color: #90caf9;
+  border-color: #42a5f5;
+  box-shadow: 0 0 10px #64b5f6;
+}
+
 .mainKey {
   font-size: 1.5rem;
   color: gray;
