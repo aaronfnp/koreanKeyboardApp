@@ -10,12 +10,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem; /* Adds spacing between elements */
-  height: 100vh; /* Ensures the content is centered vertically */
+  gap: 1rem;
+  height: 100vh;
 }
 
 h1 {
-  margin-bottom: 1rem; /* Adds spacing below the title */
+  margin-bottom: 1rem;
 }
 
 label {

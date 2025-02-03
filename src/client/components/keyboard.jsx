@@ -4,18 +4,27 @@ import keyboard from "../utilities/koreanKeyMap";
 
 export default function Keyboard({ isShifted, setIsShifted, isActive }) {
   const [isCapsLockOn, setIsCapsLockOn] = useState(false);
-  const [activeKey, setActiveKey] = useState(null);
+  const [activeKeys, setActiveKeys] = useState([]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       setIsCapsLockOn(e.getModifierState("CapsLock"));
       if (e.key === "Shift") setIsShifted(true);
-      setActiveKey(e.key.toLowerCase());
+      const key = e.key.toLowerCase();
+      setActiveKeys((prevKeys) => {
+        if (!prevKeys.includes(key)) {
+          console.log(`added ${key}`);
+          return [...prevKeys, key];
+        }
+        return prevKeys;
+      });
     };
 
     const handleKeyUp = (e) => {
       if (e.key === "Shift") setIsShifted(false);
-      setActiveKey(null);
+      setActiveKeys((prevKeys) =>
+        prevKeys.filter((key) => key !== e.key.toLowerCase())
+      );
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -36,7 +45,7 @@ export default function Keyboard({ isShifted, setIsShifted, isActive }) {
             key={key.lowerCase}
             keyData={key}
             isUppercaseMode={isUppercaseMode}
-            isActive={activeKey === key.lowerCase}
+            isActive={activeKeys.includes(key.lowerCase)}
           />
         ))}
       </div>
@@ -46,7 +55,7 @@ export default function Keyboard({ isShifted, setIsShifted, isActive }) {
             key={key.lowerCase}
             keyData={key}
             isUppercaseMode={isUppercaseMode}
-            isActive={activeKey === key.lowerCase}
+            isActive={activeKeys.includes(key.lowerCase)}
           />
         ))}
       </div>
@@ -56,7 +65,7 @@ export default function Keyboard({ isShifted, setIsShifted, isActive }) {
             key={key.lowerCase}
             keyData={key}
             isUppercaseMode={isUppercaseMode}
-            isActive={activeKey === key.lowerCase}
+            isActive={activeKeys.includes(key.lowerCase)}
           />
         ))}
       </div>

@@ -25,12 +25,14 @@
   font-family: sans-serif;
   font-weight: bold;
   border-radius: 5px;
+  transition: 0.5s ease-out;
 }
 
 .key.active {
   background-color: #90caf9;
   border-color: #42a5f5;
   box-shadow: 0 0 10px #64b5f6;
+  transition: none;
 }
 
 .mainKey {
