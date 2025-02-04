@@ -8,9 +8,15 @@ function App() {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
   const [isShifted, setIsShifted] = useState(false);
+  const [storedWords, setStoredWords] = useState([]);
 
   function handleChange(e) {
     setInputText(e.target.value);
+  }
+
+  function handleClick() {
+    console.log(`adding ${outputText}`);
+    setStoredWords((prev) => [...prev, { korean: outputText }]);
   }
 
   const translateText = useCallback(() => {
@@ -52,10 +58,15 @@ function App() {
       <div className="output-container">
         <label>Output</label>
         <textarea value={outputText} placeholder="Translation here" readOnly />
+        <button onClick={handleClick}>Store Word</button>
       </div>
       <div className="keyboard-container">
         <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} />
       </div>
+      <h2>Stored Words</h2>
+      {storedWords.map((word) => (
+        <span>{word.korean}</span>
+      ))}
     </div>
   );
 }
