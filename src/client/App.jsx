@@ -7,6 +7,7 @@ import Keyboard from "./components/keyboard";
 function App() {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
+  const [inputEng, setEngText] = useState("");
   const [isShifted, setIsShifted] = useState(false);
   const [storedWords, setStoredWords] = useState([]);
 
@@ -14,9 +15,16 @@ function App() {
     setInputText(e.target.value);
   }
 
+  function handleEnglishChange(e) {
+    setEngText(e.target.value);
+  }
+
   function handleClick() {
     console.log(`adding ${outputText}`);
-    setStoredWords((prev) => [...prev, { korean: outputText }]);
+    setStoredWords((prev) => [...prev, { korean: outputText, english: inputEng }]);
+    setInputText("");
+    setOutputText("");
+    setEngText("");
   }
 
   const translateText = useCallback(() => {
@@ -48,16 +56,24 @@ function App() {
     <div className="App">
       <h1>Korean Keyboard</h1>
       <div className="input-container">
-        <label>Input</label>
+        <label>Input Korean</label>
         <input
           value={inputText}
           onChange={handleChange}
           placeholder="Type in English"
         />
       </div>
+      <div className="input-container">
+        <label>Input English Meaning</label>
+        <input
+          value={inputEng}
+          onChange={handleEnglishChange}
+          placeholder="Type in English"
+        />
+      </div>
       <div className="output-container">
         <label>Output</label>
-        <textarea value={outputText} placeholder="Translation here" readOnly />
+        <textarea value={`${outputText} ${inputEng ? `means ${inputEng}` : '' }`} placeholder="Translation here" readOnly />
         <button onClick={handleClick}>Store Word</button>
       </div>
       <div className="keyboard-container">
@@ -65,7 +81,7 @@ function App() {
       </div>
       <h2>Stored Words</h2>
       {storedWords.map((word) => (
-        <span>{word.korean}</span>
+        <span>{word.korean} : {word.english}</span>
       ))}
     </div>
   );
