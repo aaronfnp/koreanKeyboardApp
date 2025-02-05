@@ -3,10 +3,7 @@ import { useEffect } from "react";
 
 const useLocalStorage = (wordList, storedListInfo) => {
   const saveWordsLocally = useCallback(() => {
-    window.localStorage.setItem(
-      "LOCAL_LISTID",
-      JSON.stringify(storedListInfo.id)
-    );
+    window.localStorage.setItem("LOCAL_LIST", JSON.stringify(storedListInfo));
     window.localStorage.setItem("LOCAL_WORDLIST", JSON.stringify(wordList));
   }, [wordList, storedListInfo.id]);
 

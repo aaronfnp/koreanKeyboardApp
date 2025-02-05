@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const StoredWords = ({ words, storedListInfo }) => {
+const StoredWords = ({ words, storedListInfo, setStoredListInfo }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(storedListInfo?.name || "Untitled List");
 
@@ -11,7 +11,12 @@ const StoredWords = ({ words, storedListInfo }) => {
   function handleTitleBlur() {
     // THIS IS FOR WHEN CLICKED OFF
     setIsEditing(false);
-    // SAVE HERE IF LOCAL DB
+    setStoredListInfo((prev) => {
+      return {
+        ...prev,
+        name: title,
+      };
+    });
   }
 
   return (
