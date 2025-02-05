@@ -34,7 +34,6 @@ function App() {
       { korean: outputText, english: inputEng },
     ]);
     setInputText("");
-    setOutputText("");
     setEngText("");
   }
 

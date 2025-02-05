@@ -5,6 +5,7 @@ import characterMap from "../utilities/CharacterMap";
 export default function Keyboard({ isShifted, setIsShifted, isActive }) {
   const [isCapsLockOn, setIsCapsLockOn] = useState(false);
   const [activeKeys, setActiveKeys] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -13,7 +14,6 @@ export default function Keyboard({ isShifted, setIsShifted, isActive }) {
       const key = e.key.toLowerCase();
       setActiveKeys((prevKeys) => {
         if (!prevKeys.includes(key)) {
-          console.log(`added ${key}`);
           return [...prevKeys, key];
         }
         return prevKeys;
@@ -37,42 +37,51 @@ export default function Keyboard({ isShifted, setIsShifted, isActive }) {
   }, [setIsShifted]);
 
   const isUppercaseMode = isShifted || isCapsLockOn;
+
   return (
-    <div id="keyboard">
-      <div className="row">
-        {characterMap.slice(0, 10).map((key) => (
-          <Key
-            key={key.lowerCase}
-            keyData={key}
-            isUppercaseMode={isUppercaseMode}
-            isActive={activeKeys.includes(key.lowerCase)}
-          />
-        ))}
-      </div>
-      <div className="row">
-        {characterMap.slice(10, 19).map((key) => (
-          <Key
-            key={key.lowerCase}
-            keyData={key}
-            isUppercaseMode={isUppercaseMode}
-            isActive={activeKeys.includes(key.lowerCase)}
-          />
-        ))}
-      </div>
-      <div className="row">
-        {characterMap.slice(19).map((key) => (
-          <Key
-            key={key.lowerCase}
-            keyData={key}
-            isUppercaseMode={isUppercaseMode}
-            isActive={activeKeys.includes(key.lowerCase)}
-          />
-        ))}
-      </div>
-      <div className="mode">
-        {isUppercaseMode ? "Uppercase Mode" : "Lowercase Mode"}
-      </div>
-    </div>
+    <>
+      {isVisible && (
+        <div id="keyboard">
+          <div className="row">
+            {characterMap.slice(0, 10).map((key) => (
+              <Key
+                key={key.lowerCase}
+                keyData={key}
+                isUppercaseMode={isUppercaseMode}
+                isActive={activeKeys.includes(key.lowerCase)}
+              />
+            ))}
+          </div>
+          <div className="row">
+            {characterMap.slice(10, 19).map((key) => (
+              <Key
+                key={key.lowerCase}
+                keyData={key}
+                isUppercaseMode={isUppercaseMode}
+                isActive={activeKeys.includes(key.lowerCase)}
+              />
+            ))}
+          </div>
+          <div className="row">
+            {characterMap.slice(19).map((key) => (
+              <Key
+                key={key.lowerCase}
+                keyData={key}
+                isUppercaseMode={isUppercaseMode}
+                isActive={activeKeys.includes(key.lowerCase)}
+              />
+            ))}
+          </div>
+          <div className="mode">
+            {isUppercaseMode ? "Uppercase Mode" : "Lowercase Mode"}
+          </div>
+        </div>
+      )}
+
+      <button onClick={() => setIsVisible(!isVisible)}>
+        {isVisible ? "Hide Keyboard" : "View Keyboard"}
+      </button>
+    </>
   );
 }
 
