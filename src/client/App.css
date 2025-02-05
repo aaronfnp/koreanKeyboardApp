@@ -39,6 +39,10 @@ textarea {
   resize: none;
 }
 
+button {
+  color: white;
+}
+
 .keyboard-container {
   margin-top: 2rem;
 }

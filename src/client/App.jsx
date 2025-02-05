@@ -5,6 +5,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import StoredWords from "./components/WordList";
 import useTranslate from "../hooks/useTranslate";
 import InputContainer from "./components/InputContainer";
+import CSVComponent from "./components/CSVComponent";
 
 const basicWordList = {
   id: 1,
@@ -57,6 +58,7 @@ function App() {
         storedListInfo={storedListInfo}
         setStoredListInfo={setStoredListInfo}
       />
+      <CSVComponent />
     </div>
   );
 }
