@@ -4,6 +4,7 @@ import Keyboard from "./components/keyboard";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useTranslate from "../hooks/useTranslate";
 import TextInput from "./components/TextInput";
+import StoredWords from "./components/WordList";
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -69,12 +70,7 @@ function App() {
       <div className="keyboard-container">
         <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} />
       </div>
-      <h2>Stored Words</h2>
-      {storedWords.map((word) => (
-        <span>
-          {word.korean} : {word.english}
-        </span>
-      ))}
+      <StoredWords words={storedWords} />
     </div>
   );
 }
