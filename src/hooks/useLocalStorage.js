@@ -1,15 +1,21 @@
 import React, { useCallback } from "react";
 import { useEffect } from "react";
 
-const useLocalStorage = (wordList, listId) => {
+const useLocalStorage = (wordList, storedListInfo) => {
   const saveWordsLocally = useCallback(() => {
-    window.localStorage.setItem("LOCAL_LISTID", JSON.stringify(listId));
+    window.localStorage.setItem(
+      "LOCAL_LISTID",
+      JSON.stringify(storedListInfo.id)
+    );
     window.localStorage.setItem("LOCAL_WORDLIST", JSON.stringify(wordList));
-  }, [wordList, listId]);
+  }, [wordList, storedListInfo.id]);
 
   const removeLocalWordList = useCallback(() => {
     // May want to add check to remove only if on current word list later on
-    window.localStorage.removeItem("LOCAL_LISTID", JSON.stringify(listId));
+    window.localStorage.removeItem(
+      "LOCAL_LISTID",
+      JSON.stringify(storedListInfo.id)
+    );
     window.localStorage.removeItem("LOCAL_WORDLIST", JSON.stringify(wordList));
   }, []);
 

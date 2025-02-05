@@ -6,15 +6,24 @@ import StoredWords from "./components/WordList";
 import useTranslate from "../hooks/useTranslate";
 import InputContainer from "./components/InputContainer";
 
+const basicWordList = {
+  id: 1,
+  name: "",
+  user: "",
+  type: "",
+  wordList: [],
+};
+
 function App() {
   const [inputText, setInputText] = useState("");
   const [inputEng, setEngText] = useState("");
   const [isShifted, setIsShifted] = useState(false);
   const [storedWords, setStoredWords] = useState([]);
+  const [storedListInfo, setStoredListInfo] = useState(basicWordList);
 
   const { saveWordsLocally, removeLocalWordList } = useLocalStorage(
     storedWords,
-    1
+    storedListInfo
   );
 
   const outputText = useTranslate(inputText);
@@ -43,7 +52,11 @@ function App() {
       <button onClick={saveWordsLocally}>Save Locally</button>
 
       <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} />
-      <StoredWords words={storedWords} />
+      <StoredWords
+        words={storedWords}
+        storedListInfo={storedListInfo}
+        setStoredListInfo={setStoredListInfo}
+      />
     </div>
   );
 }

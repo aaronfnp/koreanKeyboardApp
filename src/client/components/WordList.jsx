@@ -1,7 +1,7 @@
-const StoredWords = ({ words }) => {
+const StoredWords = ({ words, storedListInfo }) => {
   return (
     <div>
-      <h2>Stored Words</h2>
+      <h2 onClick={() => ""}>{storedListInfo.name || "Untitled List"}</h2>
       <div id="listContainer">
         {words.map((word, index) => (
           <span key={index}>
