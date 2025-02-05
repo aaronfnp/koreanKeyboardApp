@@ -5,6 +5,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import TextInput from "./components/TextInput";
 import StoredWords from "./components/WordList";
 import useTranslate from "../hooks/useTranslate";
+import InputContainer from "./components/InputContainer";
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -19,14 +20,6 @@ function App() {
 
   const outputText = useTranslate(inputText);
 
-  function handleChange(e) {
-    setInputText(e.target.value);
-  }
-
-  function handleEnglishChange(e) {
-    setEngText(e.target.value);
-  }
-
   function handleClick() {
     console.log(`adding ${outputText}`);
     setStoredWords((prev) => [
@@ -40,28 +33,15 @@ function App() {
   return (
     <div className="App">
       <h1>Korean Keyboard</h1>
-      <TextInput
-        label="Input Korean"
-        value={inputText}
-        onChange={handleChange}
-        placeholder="This will output below in Korean"
+      <InputContainer
+        inputText={inputText}
+        setInputText={setInputText}
+        inputEng={inputEng}
+        setEngText={setEngText}
+        outputText={outputText}
       />
-      <TextInput
-        label="Input English Meaning"
-        value={inputEng}
-        onChange={handleEnglishChange}
-        placeholder="Type in an English translation"
-      />
-      <div className="output-container">
-        <label>Output</label>
-        <textarea
-          value={`${outputText} ${inputEng ? `means ${inputEng}` : ""}`}
-          placeholder="Translation here"
-          readOnly
-        />
-        <button onClick={handleClick}>Store Word</button>
-        <button onClick={saveWordsLocally}>Save Locally</button>
-      </div>
+      <button onClick={handleClick}>Store Word</button>
+      <button onClick={saveWordsLocally}>Save Locally</button>
       <div className="keyboard-container">
         <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} />
       </div>
