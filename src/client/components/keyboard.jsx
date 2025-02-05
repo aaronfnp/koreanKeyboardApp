@@ -41,39 +41,41 @@ export default function Keyboard({ isShifted, setIsShifted, isActive }) {
   return (
     <>
       {isVisible && (
-        <div id="keyboard">
-          <div className="row">
-            {characterMap.slice(0, 10).map((key) => (
-              <Key
-                key={key.lowerCase}
-                keyData={key}
-                isUppercaseMode={isUppercaseMode}
-                isActive={activeKeys.includes(key.lowerCase)}
-              />
-            ))}
-          </div>
-          <div className="row">
-            {characterMap.slice(10, 19).map((key) => (
-              <Key
-                key={key.lowerCase}
-                keyData={key}
-                isUppercaseMode={isUppercaseMode}
-                isActive={activeKeys.includes(key.lowerCase)}
-              />
-            ))}
-          </div>
-          <div className="row">
-            {characterMap.slice(19).map((key) => (
-              <Key
-                key={key.lowerCase}
-                keyData={key}
-                isUppercaseMode={isUppercaseMode}
-                isActive={activeKeys.includes(key.lowerCase)}
-              />
-            ))}
-          </div>
-          <div className="mode">
-            {isUppercaseMode ? "Uppercase Mode" : "Lowercase Mode"}
+        <div className="keyboard-container">
+          <div id="keyboard">
+            <div className="row">
+              {characterMap.slice(0, 10).map((key) => (
+                <Key
+                  key={key.lowerCase}
+                  keyData={key}
+                  isUppercaseMode={isUppercaseMode}
+                  isActive={activeKeys.includes(key.lowerCase)}
+                />
+              ))}
+            </div>
+            <div className="row">
+              {characterMap.slice(10, 19).map((key) => (
+                <Key
+                  key={key.lowerCase}
+                  keyData={key}
+                  isUppercaseMode={isUppercaseMode}
+                  isActive={activeKeys.includes(key.lowerCase)}
+                />
+              ))}
+            </div>
+            <div className="row">
+              {characterMap.slice(19).map((key) => (
+                <Key
+                  key={key.lowerCase}
+                  keyData={key}
+                  isUppercaseMode={isUppercaseMode}
+                  isActive={activeKeys.includes(key.lowerCase)}
+                />
+              ))}
+            </div>
+            <div className="mode">
+              {isUppercaseMode ? "Uppercase Mode" : "Lowercase Mode"}
+            </div>
           </div>
         </div>
       )}

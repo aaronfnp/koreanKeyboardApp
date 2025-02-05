@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import "./App.css";
-import Keyboard from "./components/keyboard";
+import Keyboard from "./components/Keyboard";
 import useLocalStorage from "../hooks/useLocalStorage";
-import TextInput from "./components/TextInput";
 import StoredWords from "./components/WordList";
 import useTranslate from "../hooks/useTranslate";
 import InputContainer from "./components/InputContainer";
@@ -42,9 +41,8 @@ function App() {
       />
       <button onClick={handleClick}>Store Word</button>
       <button onClick={saveWordsLocally}>Save Locally</button>
-      <div className="keyboard-container">
-        <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} />
-      </div>
+
+      <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} />
       <StoredWords words={storedWords} />
     </div>
   );
