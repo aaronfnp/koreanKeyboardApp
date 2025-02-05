@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import * as Hangul from "hangul-js";
-import keyboard from "../utilities/koreanKeyMap";
+import characterMap from "../client/utilities/CharacterMap";
 
 export default function useTranslate(inputText) {
   const [outputText, setOutputText] = useState("");
@@ -9,7 +9,7 @@ export default function useTranslate(inputText) {
     let newText = inputText
       .split("")
       .map((char) => {
-        const keyToTranslate = keyboard.find(
+        const keyToTranslate = characterMap.find(
           (item) => item.lowerCase === char.toLowerCase()
         );
 

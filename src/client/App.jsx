@@ -2,9 +2,9 @@ import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Keyboard from "./components/keyboard";
 import useLocalStorage from "../hooks/useLocalStorage";
-import useTranslate from "../hooks/useTranslate";
 import TextInput from "./components/TextInput";
 import StoredWords from "./components/WordList";
+import useTranslate from "../hooks/useTranslate";
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -37,10 +37,6 @@ function App() {
     setOutputText("");
     setEngText("");
   }
-
-  useEffect(() => {
-    translateText();
-  }, [inputText]);
 
   return (
     <div className="App">

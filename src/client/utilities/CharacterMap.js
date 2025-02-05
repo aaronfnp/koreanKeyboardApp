@@ -1,4 +1,4 @@
-const keyboard = [
+const characterMap = [
   { lowerCase: "q", upperCase: "Q", hangul: "ㅂ", hangulCap: "ㅃ" },
   { lowerCase: "w", upperCase: "W", hangul: "ㅈ", hangulCap: "ㅉ" },
   { lowerCase: "e", upperCase: "E", hangul: "ㄷ", hangulCap: "ㄸ" },
@@ -27,4 +27,4 @@ const keyboard = [
   { lowerCase: "m", upperCase: "M", hangul: "ㅡ" },
 ];
 
-export default keyboard;
+export default characterMap;

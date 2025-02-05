@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Keyboard.css";
-import keyboard from "../utilities/koreanKeyMap";
+import characterMap from "../utilities/CharacterMap";
 
 export default function Keyboard({ isShifted, setIsShifted, isActive }) {
   const [isCapsLockOn, setIsCapsLockOn] = useState(false);
@@ -40,7 +40,7 @@ export default function Keyboard({ isShifted, setIsShifted, isActive }) {
   return (
     <div id="keyboard">
       <div className="row">
-        {keyboard.slice(0, 10).map((key) => (
+        {characterMap.slice(0, 10).map((key) => (
           <Key
             key={key.lowerCase}
             keyData={key}
@@ -50,7 +50,7 @@ export default function Keyboard({ isShifted, setIsShifted, isActive }) {
         ))}
       </div>
       <div className="row">
-        {keyboard.slice(10, 19).map((key) => (
+        {characterMap.slice(10, 19).map((key) => (
           <Key
             key={key.lowerCase}
             keyData={key}
@@ -60,7 +60,7 @@ export default function Keyboard({ isShifted, setIsShifted, isActive }) {
         ))}
       </div>
       <div className="row">
-        {keyboard.slice(19).map((key) => (
+        {characterMap.slice(19).map((key) => (
           <Key
             key={key.lowerCase}
             keyData={key}
