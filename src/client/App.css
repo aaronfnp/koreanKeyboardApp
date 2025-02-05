@@ -49,6 +49,10 @@ textarea {
   flex-direction: column;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 #listContainer {
   display: flex;
   flex-direction: column;
