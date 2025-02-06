@@ -12,6 +12,9 @@ const basicWordList = {
   name: "",
   user: "",
   type: "",
+  difficulty: "",
+  themes: "",
+  image: "",
   wordList: [],
 };
 
@@ -58,7 +61,7 @@ function App() {
         storedListInfo={storedListInfo}
         setStoredListInfo={setStoredListInfo}
       />
-      <CSVComponent />
+      <CSVComponent setStoredWords={setStoredWords} />
     </div>
   );
 }
