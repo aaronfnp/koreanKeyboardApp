@@ -1,46 +1,68 @@
 import { useState } from "react";
 
-const StoredWords = ({ words, storedListInfo, setStoredListInfo }) => {
+const StoredWords = ({
+  storedWords,
+  storedListInfo,
+  setStoredListInfo,
+  setStoredWords,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(storedListInfo?.name || "Untitled List");
+  const [activeId, setActiveId] = useState(null); // To track which word is being edited
 
   function handleTitleChange(e) {
     setTitle(e.target.value);
   }
 
   function handleTitleBlur() {
-    // THIS IS FOR WHEN CLICKED OFF
     setIsEditing(false);
-    setStoredListInfo((prev) => {
-      return {
-        ...prev,
-        name: title,
-      };
-    });
+    setStoredListInfo((prev) => ({ ...prev, name: title }));
+  }
+
+  function handleWordChange(e, index, field) {
+    setStoredWords((prevWords) =>
+      prevWords.map((word, i) =>
+        i === index ? { ...word, [field]: e.target.value } : word
+      )
+    );
+  }
+
+  function handleWordClick(index) {
+    setActiveId(index);
   }
 
   return (
     <div>
       {isEditing ? (
-        <input
-          type="text"
-          value={title}
-          onChange={handleTitleChange}
-          onBlur={handleTitleBlur}
-          autoFocus
+        <EditableTitle
+          title={title}
+          handleTitleChange={handleTitleChange}
+          handleTitleBlur={handleTitleBlur}
         />
       ) : (
-        <h2 onClick={() => setIsEditing(true)} className="clickable">
-          {title}
-        </h2>
+        <NonEditableTitle title={title} setIsEditing={setIsEditing} />
       )}
 
+      <span onClick={() => setIsEditing(!isEditing)}>Edit List</span>
+
       <div id="listContainer">
-        {words.length > 0 ? (
-          words.map((word, index) => (
-            <span key={index}>
-              {word.korean} : {word.english}
-            </span>
+        {storedWords.length > 0 ? (
+          storedWords.map((word, index) => (
+            <div key={index}>
+              {isEditing ? (
+                <EditableWord
+                  word={word}
+                  index={index}
+                  handleWordChange={handleWordChange}
+                />
+              ) : (
+                <NonEditableWord
+                  word={word}
+                  index={index}
+                  handleWordClick={handleWordClick}
+                />
+              )}
+            </div>
           ))
         ) : (
           <p>No words available.</p>
@@ -51,3 +73,30 @@ const StoredWords = ({ words, storedListInfo, setStoredListInfo }) => {
 };
 
 export default StoredWords;
+
+const EditableTitle = ({ title, handleTitleChange, handleTitleBlur }) => (
+  <input type="text" value={title} onChange={handleTitleChange} />
+);
+
+const NonEditableTitle = ({ title, setIsEditing }) => <h2>{title}</h2>;
+
+const EditableWord = ({ word, index, handleWordChange, setActiveId }) => (
+  <>
+    <input
+      type="text"
+      value={word.korean}
+      onChange={(e) => handleWordChange(e, index, "korean")}
+    />
+    <input
+      type="text"
+      value={word.english}
+      onChange={(e) => handleWordChange(e, index, "english")}
+    />
+  </>
+);
+
+const NonEditableWord = ({ word, index, handleWordClick }) => (
+  <span onClick={() => handleWordClick(index)}>
+    {word.korean} : {word.english}
+  </span>
+);

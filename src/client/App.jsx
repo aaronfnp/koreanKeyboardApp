@@ -57,7 +57,8 @@ function App() {
 
       <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} />
       <StoredWords
-        words={storedWords}
+        storedWords={storedWords}
+        setStoredWords={setStoredWords}
         storedListInfo={storedListInfo}
         setStoredListInfo={setStoredListInfo}
       />
