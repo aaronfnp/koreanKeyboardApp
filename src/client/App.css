@@ -63,7 +63,9 @@ button {
 #listContainer {
   display: block;
   margin-top: 20px; /* Ensures sidebar and details are side by side */
-  height: 100vh; /* Full viewport height */
+  height: 30vh; /* Full viewport height */
+  border: 1px black solid;
+  overflow-y: scroll;
 }
 
 #listContainer div {
@@ -96,4 +98,23 @@ button {
 .list-details ul {
   list-style-type: none;
   padding: 0;
+}
+
+#study-container {
+  display: flex;
+  flex-direction: row;
+  align-content: space-evenly;
+  justify-content: center;
+}
+
+.study-box {
+  padding: 20px;
+  margin: 5px;
+  border: 1px black solid;
+}
+
+#header {
+  height: 40px;
+  width: 100vh;
+  border: 1px black solid;
 }
