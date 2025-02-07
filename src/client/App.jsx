@@ -27,7 +27,9 @@ function App() {
 
   const { saveWordsLocally, removeLocalWordList } = useLocalStorage(
     storedWords,
-    storedListInfo
+    storedListInfo,
+    setStoredWords,
+    setStoredListInfo
   );
 
   const outputText = useTranslate(inputText);

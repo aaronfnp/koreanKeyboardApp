@@ -1,24 +1,41 @@
-import React, { useCallback } from "react";
-import { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 
-const useLocalStorage = (wordList, storedListInfo) => {
+const localVars = { list: "LOCAL_LIST", words: "LOCAL_WORDS" };
+
+const useLocalStorage = (
+  wordList,
+  storedListInfo,
+  setStoredWords,
+  setStoredListInfo
+) => {
   const saveWordsLocally = useCallback(() => {
-    window.localStorage.setItem("LOCAL_LIST", JSON.stringify(storedListInfo));
-    window.localStorage.setItem("LOCAL_WORDLIST", JSON.stringify(wordList));
-  }, [wordList, storedListInfo.id]);
+    window.localStorage.setItem(localVars.list, JSON.stringify(storedListInfo));
+    window.localStorage.setItem(localVars.words, JSON.stringify(wordList));
+  }, [wordList, storedListInfo]);
 
   const removeLocalWordList = useCallback(() => {
-    // May want to add check to remove only if on current word list later on
-    window.localStorage.removeItem(
-      "LOCAL_LISTID",
-      JSON.stringify(storedListInfo.id)
-    );
-    window.localStorage.removeItem("LOCAL_WORDLIST", JSON.stringify(wordList));
+    window.localStorage.removeItem(localVars.list);
+    window.localStorage.removeItem(localVars.words);
+  }, []);
+
+  const loadLocally = useCallback(() => {
+    const localList = window.localStorage.getItem(localVars.list);
+    const localWords = window.localStorage.getItem(localVars.words);
+    if (localList && localWords) {
+      setStoredWords(JSON.parse(localWords));
+      setStoredListInfo(JSON.parse(localList));
+    }
+  }, [setStoredWords, setStoredListInfo]);
+
+  useEffect(() => {
+    loadLocally();
   }, []);
 
   useEffect(() => {
-    saveWordsLocally();
-  }, [wordList, saveWordsLocally]);
+    if (wordList.length > 1) {
+      saveWordsLocally();
+    }
+  }, [wordList]);
 
   return {
     saveWordsLocally,

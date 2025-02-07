@@ -11,7 +11,9 @@ const StoredWords = ({
   const [activeId, setActiveId] = useState(null); // To track which word is being edited
 
   function handleTitleChange(e) {
-    setTitle(e.target.value);
+    const newTitle = e.target.value;
+    setTitle(newTitle);
+    setStoredListInfo((prev) => ({ ...prev, name: newTitle }));
   }
 
   function handleTitleBlur() {
@@ -43,7 +45,12 @@ const StoredWords = ({
         <NonEditableTitle title={title} setIsEditing={setIsEditing} />
       )}
 
-      <span onClick={() => setIsEditing(!isEditing)}>Edit List</span>
+      <span
+        onClick={() => setIsEditing(!isEditing)}
+        style={{ color: "#007BFF", cursor: "pointer" }}
+      >
+        Edit List
+      </span>
 
       <div id="listContainer">
         {storedWords.length > 0 ? (
