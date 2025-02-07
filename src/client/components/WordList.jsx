@@ -35,7 +35,7 @@ const StoredWords = ({
 
   return (
     <div>
-      {isEditing ? (
+      {/* {isEditing ? (
         <EditableTitle
           title={title}
           handleTitleChange={handleTitleChange}
@@ -43,7 +43,7 @@ const StoredWords = ({
         />
       ) : (
         <NonEditableTitle title={title} setIsEditing={setIsEditing} />
-      )}
+      )} */}
 
       <span
         onClick={() => setIsEditing(!isEditing)}
@@ -79,16 +79,19 @@ const StoredWords = ({
   );
 };
 
-export default StoredWords;
-
 const EditableTitle = ({ title, handleTitleChange, handleTitleBlur }) => (
-  <input type="text" value={title} onChange={handleTitleChange} />
+  <input
+    type="text"
+    value={title}
+    onChange={handleTitleChange}
+    onBlur={handleTitleBlur}
+  />
 );
 
 const NonEditableTitle = ({ title, setIsEditing }) => <h2>{title}</h2>;
 
-const EditableWord = ({ word, index, handleWordChange, setActiveId }) => (
-  <>
+const EditableWord = ({ word, index, handleWordChange }) => (
+  <div>
     <input
       type="text"
       value={word.korean}
@@ -99,7 +102,7 @@ const EditableWord = ({ word, index, handleWordChange, setActiveId }) => (
       value={word.english}
       onChange={(e) => handleWordChange(e, index, "english")}
     />
-  </>
+  </div>
 );
 
 const NonEditableWord = ({ word, index, handleWordClick }) => (
@@ -107,3 +110,5 @@ const NonEditableWord = ({ word, index, handleWordClick }) => (
     {word.korean} : {word.english}
   </span>
 );
+
+export default StoredWords;

@@ -61,6 +61,39 @@ button {
 }
 
 #listContainer {
+  display: block;
+  margin-top: 20px; /* Ensures sidebar and details are side by side */
+  height: 100vh; /* Full viewport height */
+}
+
+#listContainer div {
+  margin-bottom: 10px;
+}
+
+.list-sidebar {
+  flex: 0 0 30%;
+  height: 100vh;
+  padding: 20px;
+  background: #f6f6f6;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.list-details {
+  margin-left: 30%; /* Keeps the sidebar fixed */
+  overflow-y: auto;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
+}
+
+.list-details h3 {
+  margin-top: 20px;
+}
+
+.list-details ul {
+  list-style-type: none;
+  padding: 0;
 }

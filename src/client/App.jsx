@@ -6,6 +6,7 @@ import StoredWords from "./components/WordList";
 import useTranslate from "../hooks/useTranslate";
 import InputContainer from "./components/InputContainer";
 import CSVComponent from "./components/CSVComponent";
+import BookDisplay from "./components/BookDisplay";
 
 const basicWordList = {
   id: 1,
@@ -46,25 +47,32 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Korean Keyboard</h1>
-      <InputContainer
+      {/* <Header /> */}
+      <BookDisplay
+        storedWords={storedWords}
+        setStoredWords={setStoredWords}
+        storedListInfo={storedListInfo}
+        setStoredListInfo={setStoredListInfo}
+      />
+      {/* <h1>Korean Keyboard</h1> */}
+      {/* <InputContainer
         inputText={inputText}
         setInputText={setInputText}
         inputEng={inputEng}
         setEngText={setEngText}
         outputText={outputText}
       />
-      <button onClick={handleClick}>Store Word</button>
-      <button onClick={saveWordsLocally}>Save Locally</button>
+      <button onClick={handleClick}>Store Word</button> */}
+      {/* <button onClick={saveWordsLocally}>Save Locally</button> */}
 
-      <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} />
-      <StoredWords
+      {/* <Keyboard isShifted={isShifted} setIsShifted={setIsShifted} /> */}
+      {/* <StoredWords
         storedWords={storedWords}
         setStoredWords={setStoredWords}
         storedListInfo={storedListInfo}
         setStoredListInfo={setStoredListInfo}
-      />
-      <CSVComponent setStoredWords={setStoredWords} />
+      /> */}
+      {/* <CSVComponent setStoredWords={setStoredWords} /> */}
     </div>
   );
 }
