@@ -9,12 +9,14 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.0.4",
     "csv-import-react": "^1.0.14",
     "express": "^4.18.2",
     "hangul-js": "^0.2.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.1.5",
+    "tailwindcss": "^4.0.4",
     "vite-express": "*"
   },
   "devDependencies": {

@@ -10,7 +10,7 @@ const ListSidebar = ({ storedListInfo }) => {
           alt="Book Cover"
         />
         <h2>{storedListInfo.name}</h2>
-        <p>Created by: {storedListInfo.user}</p>
+        <p className="text-black">Created by: {storedListInfo.user}</p>
         <button>Want to Study</button>
         <div className="rating">⭐⭐⭐⭐☆</div>
       </div>
