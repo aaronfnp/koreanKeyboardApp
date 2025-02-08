@@ -7,6 +7,7 @@ import useTranslate from "../hooks/useTranslate";
 import InputContainer from "./components/InputContainer";
 import CSVComponent from "./components/CSVComponent";
 import BookDisplay from "./components/BookDisplay";
+import Header from "./components/Header";
 
 const basicWordList = {
   id: 1,
@@ -47,7 +48,9 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Header /> */}
+      <div className="w-full">
+        <Header />
+      </div>
       <BookDisplay
         storedWords={storedWords}
         setStoredWords={setStoredWords}
