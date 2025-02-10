@@ -64,8 +64,8 @@ button {
 
 #listContainer {
   display: block;
-  margin-top: 20px; /* Ensures sidebar and details are side by side */
-  height: 30vh; /* Full viewport height */
+  margin-top: 20px;
+  height: 30vh;
   border: 1px black solid;
   overflow-y: scroll;
 }
@@ -78,15 +78,15 @@ button {
   flex: 0 0 30%;
   height: 100vh;
   padding: 20px;
-  background: #f6f6f6;
+  background: darkgrey;
   position: fixed;
-  top: 0;
+  top: 70px;
   left: 0;
   overflow-y: auto;
 }
 
 .list-details {
-  margin-left: 30%; /* Keeps the sidebar fixed */
+  margin-left: 30%;
   overflow-y: auto;
   flex-grow: 1;
   display: flex;
@@ -112,11 +112,5 @@ button {
 .study-box {
   padding: 20px;
   margin: 5px;
-  border: 1px black solid;
-}
-
-#header {
-  height: 40px;
-  width: 100vh;
   border: 1px black solid;
 }

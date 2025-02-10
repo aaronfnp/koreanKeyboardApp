@@ -20,7 +20,7 @@ const ListDetails = ({
   const exampleCategories = `Cozy, Food, Healing, Daily-life, Countryside, Farming, Cooking`;
 
   return (
-    <main className="list-details">
+    <main className="list-details mt-10">
       <h3>Description</h3>
       <p>{exampleDescription || "No description available"}</p>
 

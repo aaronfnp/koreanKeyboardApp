@@ -48,9 +48,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="w-full">
-        <Header />
-      </div>
+      <Header />
       <BookDisplay
         storedWords={storedWords}
         setStoredWords={setStoredWords}
