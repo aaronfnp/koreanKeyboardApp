@@ -21,6 +21,7 @@ const ListDetails = ({
 
   return (
     <main className="list-details mt-10">
+      <h1 className="text-3xl">Little Forest</h1>
       <h3>Description</h3>
       <p>{exampleDescription || "No description available"}</p>
 

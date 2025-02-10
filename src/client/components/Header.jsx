@@ -26,7 +26,7 @@ import {
   PhoneIcon,
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const products = [
   {
@@ -88,14 +88,14 @@ export default function Header() {
         className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link to="/home" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img
               alt=""
               src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
               className="h-8 w-auto"
             />
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -108,15 +108,15 @@ export default function Header() {
           </button>
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          <Link to="/home" className="text-sm/6 font-semibold text-gray-900">
             Home
-          </a>
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          </Link>
+          <Link href="/" className="text-sm/6 font-semibold text-gray-900">
             My Books
-          </a>
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            About
-          </a>
+          </Link>
+          <Link to="/typing" className="text-sm/6 font-semibold text-gray-900">
+            Typing
+          </Link>
           <input
             value={searchValue}
             onChange={(e) => handleChange(e)}
