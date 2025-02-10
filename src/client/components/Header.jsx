@@ -75,8 +75,10 @@ export default function Header() {
     setSearchValue(e.target.value);
   }
 
-  function handleClick() {
-    navigate(`${searchValue}`);
+  function handleClick(value) {
+    if (value.trim()) {
+      navigate(`/search?query=${encodeURIComponent(value)}`);
+    }
   }
 
   return (
@@ -118,9 +120,9 @@ export default function Header() {
           <input
             value={searchValue}
             onChange={(e) => handleChange(e)}
-            className="text-sm/6 font-semibold text-white-900"
+            className="text-sm/6 font-semibold text-white"
           />
-          <button onClick={handleClick}>Search</button>
+          <button onClick={() => handleClick(searchValue)}>Search</button>
           <Popover className="relative">
             <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900">
               Browse
