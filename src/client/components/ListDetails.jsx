@@ -21,12 +21,12 @@ const ListDetails = ({
 
   return (
     <main className="list-details mt-10">
-      <h1 className="text-3xl">Little Forest</h1>
+      <h1 className="text-3xl">{storedListInfo.name}</h1>
       <h3>Description</h3>
-      <p>{exampleDescription || "No description available"}</p>
+      <p>{storedListInfo.description || "No description available"}</p>
 
       <h3>Categories</h3>
-      <p>{exampleCategories || "No categories"}</p>
+      <p>{storedListInfo.themes || "No categories"}</p>
 
       <h3>Similar Lists</h3>
       <ul>

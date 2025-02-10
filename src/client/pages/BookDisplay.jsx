@@ -5,11 +5,13 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { useParams } from "react-router-dom";
 import CSVComponent from "../components/CSVComponent";
 import { useState } from "react";
+import Edit from "../components/Edit";
 
 const basicWordList = {
   id: 1,
   name: "",
   user: "",
+  description: "",
   type: "",
   difficulty: "",
   themes: "",
@@ -18,6 +20,7 @@ const basicWordList = {
 };
 
 export default function BookDisplay() {
+  const [isEditing, setIsEditing] = useState(false);
   const [storedWords, setStoredWords] = useState([]);
   const [storedListInfo, setStoredListInfo] = useState(basicWordList);
   const { saveWordsLocally, removeLocalWordList } = useLocalStorage(
@@ -33,13 +36,30 @@ export default function BookDisplay() {
 
   return (
     <div className="list-page">
-      <ListSidebar storedListInfo={storedListInfo} />
-      <ListDetails
-        storedWords={storedWords}
-        setStoredWords={setStoredWords}
-        storedListInfo={storedListInfo}
-        setStoredListInfo={setStoredListInfo}
-      />
+      <button
+        className="mt-10 text-black"
+        onClick={() => setIsEditing((e) => !e)}
+      >
+        Edit
+      </button>
+      {isEditing ? (
+        <Edit
+          storedWords={storedWords}
+          storedListInfo={storedListInfo}
+          setStoredWords={setStoredWords}
+          setStoredListInfo={setStoredListInfo}
+        />
+      ) : (
+        <>
+          <ListSidebar storedListInfo={storedListInfo} />
+          <ListDetails
+            storedWords={storedWords}
+            setStoredWords={setStoredWords}
+            storedListInfo={storedListInfo}
+            setStoredListInfo={setStoredListInfo}
+          />
+        </>
+      )}
       <CSVComponent setStoredWords={setStoredWords} />
     </div>
   );
