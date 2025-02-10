@@ -26,6 +26,7 @@ import {
   PhoneIcon,
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
+import { useNavigate } from "react-router-dom";
 
 const products = [
   {
@@ -66,6 +67,17 @@ const callsToAction = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
+  const navigate = useNavigate();
+
+  function handleChange(e) {
+    setSearchValue(e.target.value);
+  }
+
+  function handleClick() {
+    navigate(`${searchValue}`);
+  }
 
   return (
     <header className="bg-black fixed top-0 left-0 w-full z-50">
@@ -103,6 +115,12 @@ export default function Header() {
           <a href="#" className="text-sm/6 font-semibold text-gray-900">
             About
           </a>
+          <input
+            value={searchValue}
+            onChange={(e) => handleChange(e)}
+            className="text-sm/6 font-semibold text-white-900"
+          />
+          <button onClick={handleClick}>Search</button>
           <Popover className="relative">
             <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900">
               Browse
