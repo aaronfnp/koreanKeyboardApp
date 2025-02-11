@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import Flashcard from "./Flashcard";
+import StudyWordList from "./WordList";
 
-export default function StudyContainer({ storedWords }) {
+export default function StudyContainer({
+  storedWords,
+  setStoredWords,
+  storedListInfo,
+  setStoredListInfo,
+}) {
   const exampleTypes = ["Flashcards", "Test", "Match"];
   const [activeType, setActiveType] = useState("Flashcards");
 
@@ -28,6 +34,12 @@ export default function StudyContainer({ storedWords }) {
             )}
           </div>
         )}
+        <StudyWordList
+          storedWords={storedWords}
+          setStoredWords={setStoredWords}
+          storedListInfo={storedListInfo}
+          setStoredListInfo={setStoredListInfo}
+        />
       </main>
     </>
   );

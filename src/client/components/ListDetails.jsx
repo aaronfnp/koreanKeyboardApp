@@ -1,5 +1,6 @@
 import React from "react";
 import StoredWords from "./WordList";
+import { ExampleWordList } from "./WordList";
 
 const ListDetails = ({
   storedWords,
@@ -54,8 +55,8 @@ const ListDetails = ({
           </div>
         ))}
       </div>
-
-      <StoredWords
+      <p>Sample Word List</p>
+      <ExampleWordList
         storedWords={storedWords}
         setStoredWords={setStoredWords}
         storedListInfo={storedListInfo}

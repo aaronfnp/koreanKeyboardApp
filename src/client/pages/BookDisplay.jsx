@@ -45,7 +45,12 @@ export default function BookDisplay() {
           setStoredListInfo={setStoredListInfo}
         />
       ) : mode === "studying" ? (
-        <StudyContainer storedWords={storedWords} />
+        <StudyContainer
+          storedWords={storedWords}
+          setStoredWords={setStoredWords}
+          storedListInfo={storedListInfo}
+          setStoredListInfo={setStoredListInfo}
+        />
       ) : (
         <ListDetails
           storedWords={storedWords}
