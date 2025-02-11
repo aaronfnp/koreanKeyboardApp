@@ -2,6 +2,7 @@ import React from "react";
 import StoredWords from "./WordList";
 import CSVComponent from "./CSVComponent";
 import StudyContainer from "./StudyContainer";
+import Flashcard from "./Flashcard";
 
 const ListDetails = ({
   storedWords,
@@ -63,6 +64,7 @@ const ListDetails = ({
         setStoredListInfo={setStoredListInfo}
       />
       <StudyContainer />
+      <Flashcard />
 
       <CSVComponent setStoredWords={setStoredWords} />
     </main>
