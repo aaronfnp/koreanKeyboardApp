@@ -28,6 +28,9 @@ import {
 } from "@heroicons/react/20/solid";
 import { useNavigate, Link } from "react-router-dom";
 
+import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+
 const products = [
   {
     name: "Analytics",
@@ -68,6 +71,7 @@ const callsToAction = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [activeUser, setActiveUser] = useState("");
 
   const navigate = useNavigate();
 
@@ -79,6 +83,12 @@ export default function Header() {
     if (value.trim()) {
       navigate(`/search?query=${encodeURIComponent(value)}`);
     }
+  }
+
+  function handleLogin(credentialResponse) {
+    const decoded = jwtDecode(credentialResponse.credential);
+    console.log(decoded);
+    setActiveUser(decoded.email);
   }
 
   return (
@@ -183,11 +193,23 @@ export default function Header() {
             </PopoverPanel>
           </Popover>
         </PopoverGroup>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
+        {!activeUser ? (
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              handleLogin(credentialResponse);
+            }}
+            onError={() => console.log("Login Failed")}
+          />
+        ) : (
+          <button
+            onClick={() => {
+              googleLogout();
+              setActiveUser(null);
+            }}
+          >
+            Logout
+          </button>
+        )}
       </nav>
       <Dialog
         open={mobileMenuOpen}
