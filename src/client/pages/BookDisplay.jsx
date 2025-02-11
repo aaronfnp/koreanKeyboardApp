@@ -38,10 +38,7 @@ export default function BookDisplay() {
 
   return (
     <div className="list-page">
-      <button
-        className="mt-10 bg-black"
-        onClick={() => setIsEditing((e) => !e)}
-      >
+      <button className="mt-10" onClick={() => setIsEditing((e) => !e)}>
         Edit
       </button>
       {isEditing ? (

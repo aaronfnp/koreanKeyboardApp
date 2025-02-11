@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: #c9c5ba;
+  color: #407076;
 }
 
 .App {
@@ -21,12 +22,22 @@
 
 h1 {
   margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #407076;
+}
+
+h3 {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  color: #698996;
 }
 
 label {
   font-size: 1.2rem;
   font-weight: bold;
   margin-top: 1rem;
+  color: #407076;
 }
 
 input,
@@ -34,9 +45,11 @@ textarea {
   width: 300px;
   padding: 0.5rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #97b1a6;
   border-radius: 5px;
   text-align: center;
+  background-color: #ebbab9;
+  color: #407076;
 }
 
 textarea {
@@ -45,61 +58,55 @@ textarea {
 }
 
 button {
+  background-color: #407076;
   color: white;
-}
-
-.keyboard-container {
-  margin-top: 2rem;
-}
-
-.output-container,
-.input-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.clickable {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
-#listContainer {
-  display: block;
-  margin-top: 20px;
-  height: 30vh;
-  border: 1px black solid;
-  overflow-y: scroll;
-}
-
-#listContainer div {
-  margin-bottom: 10px;
+button:hover {
+  background-color: #698996;
 }
 
 .list-sidebar {
-  flex: 0 0 30%;
+  display: flex;
+  justify-content: center;
+  width: 30vh;
   height: 100vh;
   padding: 20px;
-  background: darkgrey;
+  padding-top: 100px;
+  background: #97b1a6;
   position: fixed;
-  top: 70px;
+  top: 0px;
   left: 0;
   overflow-y: auto;
+  color: #ebbab9;
 }
 
 .list-details {
-  margin-left: 30%;
+  margin-left: 30vh;
   overflow-y: auto;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-}
-
-.list-details h3 {
-  margin-top: 20px;
+  padding: 20px;
+  background-color: #f1f1e6;
 }
 
 .list-details ul {
   list-style-type: none;
   padding: 0;
+}
+
+.list-details li {
+  background-color: #97b1a6;
+  color: #407076;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
 }
 
 #study-container {
@@ -112,5 +119,34 @@ button {
 .study-box {
   padding: 20px;
   margin: 5px;
-  border: 1px black solid;
+  border: 1px solid #407076;
+  background-color: #ebbab9;
+  color: #407076;
+  border-radius: 5px;
+}
+
+#listContainer {
+  display: block;
+  margin-top: 20px;
+  height: 30vh;
+  border: 1px solid #407076;
+  overflow-y: scroll;
+  background-color: #c9c5ba;
+  padding: 10px;
+}
+
+#listContainer div {
+  margin-bottom: 10px;
+}
+
+#header {
+  background-color: #f1f1e6;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.keyboard-container {
+  margin-top: 2rem;
 }

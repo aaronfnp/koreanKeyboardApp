@@ -82,7 +82,10 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-black fixed top-0 left-0 w-full z-50">
+    <header
+      id="header"
+      className="fixed top-0 left-0 w-full z-50 drop-shadow-lg"
+    >
       <nav
         aria-label="Global"
         className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8"
