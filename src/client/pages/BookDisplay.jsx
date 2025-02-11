@@ -15,7 +15,7 @@ const basicWordList = {
   description: "",
   type: "",
   difficulty: "",
-  themes: "",
+  themes: [],
   image: "",
   url: "",
   wordList: [],
@@ -38,9 +38,6 @@ export default function BookDisplay() {
 
   return (
     <div className="list-page">
-      <button className="mt-10" onClick={() => setIsEditing((e) => !e)}>
-        Edit
-      </button>
       {isEditing ? (
         <Edit
           storedWords={storedWords}
@@ -59,10 +56,15 @@ export default function BookDisplay() {
           />
         </>
       )}
-      <button className="bg-black" onClick={saveWordsLocally}>
-        Save Locally
-      </button>
-      <CSVComponent setStoredWords={setStoredWords} />
+      <div className="">
+        <button className="bg-black" onClick={saveWordsLocally}>
+          Save Locally
+        </button>
+        <CSVComponent setStoredWords={setStoredWords} />
+        <button className="mt-10" onClick={() => setIsEditing((e) => !e)}>
+          Edit
+        </button>
+      </div>
     </div>
   );
 }

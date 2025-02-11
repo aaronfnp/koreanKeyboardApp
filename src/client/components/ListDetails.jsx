@@ -32,12 +32,19 @@ const ListDetails = ({
 
   return (
     <main className="list-details mt-10 rounded-lg">
-      <h1 className="text-3xl">{storedListInfo.name}</h1>
+      <h1 className="text-3xl">{storedListInfo.title_en}</h1>
+      <h2>{storedListInfo.title_kr ? `${storedListInfo.title_kr}` : ""}</h2>
       <h3>Description</h3>
       <p>{storedListInfo.description || "No description available"}</p>
 
       <h3>Categories</h3>
-      <p>{storedListInfo.themes || "No categories"}</p>
+      <div>
+        {storedListInfo.themes.map((t, index) => (
+          <div key={index} className="theme-item">
+            <p>{t}</p>
+          </div>
+        ))}
+      </div>
 
       <h3>Similar Books</h3>
       <div className="similar-books-container">

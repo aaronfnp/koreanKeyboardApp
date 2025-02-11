@@ -123,6 +123,7 @@ export default function Header() {
           <input
             value={searchValue}
             onChange={(e) => handleChange(e)}
+            placeholder="Find a book!"
             className="text-sm/6 font-semibold text-white"
           />
           <button onClick={() => handleClick(searchValue)}>Search</button>
