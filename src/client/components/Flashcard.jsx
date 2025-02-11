@@ -24,11 +24,11 @@ export default function Flashcard({ storedWords }) {
           className={`card ${flip ? "flip" : ""}`}
           onClick={() => setFlip(!flip)}
         >
-          <div className="front">
-            {flip
-              ? storedWords[currentIndex].english
-              : storedWords[currentIndex].korean}
-          </div>
+          {!flip ? (
+            <div className="front">{storedWords[currentIndex].korean}</div>
+          ) : (
+            <div className="back">{storedWords[currentIndex].english}</div>
+          )}
         </div>
 
         <button onClick={nextCard}>
