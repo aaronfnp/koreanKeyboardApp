@@ -220,10 +220,6 @@ button:hover {
   --rotate-y: 180deg;
 }
 
-.card .front {
-  left: 0;
-}
-
 .card .front,
 .card .back {
   position: absolute;
