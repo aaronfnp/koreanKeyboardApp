@@ -27,8 +27,12 @@ export default function Edit({
         value={storedListInfo.title_en}
         onChange={handleChange}
       />
-      <label>User</label>
-      <input name="user" value={storedListInfo.user} onChange={handleChange} />
+      <label>Author</label>
+      <input
+        name="author"
+        value={storedListInfo.author}
+        onChange={handleChange}
+      />
       <label>Description</label>
       <input
         name="description"

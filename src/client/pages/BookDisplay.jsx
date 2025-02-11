@@ -11,7 +11,7 @@ const basicWordList = {
   id: 1,
   title_en: "",
   title_kr: "",
-  user: "",
+  author: "",
   description: "",
   type: "",
   difficulty: "",
