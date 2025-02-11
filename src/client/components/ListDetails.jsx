@@ -63,8 +63,7 @@ const ListDetails = ({
         storedListInfo={storedListInfo}
         setStoredListInfo={setStoredListInfo}
       />
-      <StudyContainer />
-      <Flashcard storedWords={storedWords} />
+      
 
       <CSVComponent setStoredWords={setStoredWords} />
     </main>

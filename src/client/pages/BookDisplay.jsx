@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 import CSVComponent from "../components/CSVComponent";
 import { useState } from "react";
 import Edit from "../components/Edit";
+import StudyContainer from "../components/StudyContainer";
+import Flashcard from "../components/Flashcard";
 
 const basicWordList = {
   id: 1,
@@ -38,6 +40,7 @@ export default function BookDisplay() {
 
   return (
     <div className="list-page">
+      <ListSidebar storedListInfo={storedListInfo} />
       {isEditing ? (
         <Edit
           storedWords={storedWords}
@@ -47,7 +50,6 @@ export default function BookDisplay() {
         />
       ) : (
         <>
-          <ListSidebar storedListInfo={storedListInfo} />
           <ListDetails
             storedWords={storedWords}
             setStoredWords={setStoredWords}
@@ -57,13 +59,12 @@ export default function BookDisplay() {
         </>
       )}
       <div className="">
-        <button className="bg-black" onClick={saveWordsLocally}>
-          Save Locally
-        </button>
+        <button onClick={saveWordsLocally}>Save Locally</button>
         <CSVComponent setStoredWords={setStoredWords} />
         <button className="mt-10" onClick={() => setIsEditing((e) => !e)}>
           Edit
         </button>
+        <StudyContainer storedWords={storedWords} />
       </div>
     </div>
   );
