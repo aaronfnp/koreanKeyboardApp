@@ -1,14 +1,12 @@
 import React from "react";
 import StoredWords from "./WordList";
-import CSVComponent from "./CSVComponent";
-import StudyContainer from "./StudyContainer";
-import Flashcard from "./Flashcard";
 
 const ListDetails = ({
   storedWords,
   setStoredWords,
   storedListInfo,
   setStoredListInfo,
+  setIsStudying,
 }) => {
   const exampleDescription = `
   "Little Forest (リトル・フォレスト, Ritoru Foresuto) is a Japanese slice-of-life manga series 
@@ -63,9 +61,6 @@ const ListDetails = ({
         storedListInfo={storedListInfo}
         setStoredListInfo={setStoredListInfo}
       />
-      
-
-      <CSVComponent setStoredWords={setStoredWords} />
     </main>
   );
 };
