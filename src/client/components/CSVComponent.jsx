@@ -6,7 +6,9 @@ export default function CSVComponent({ setStoredWords }) {
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)}>Import CSV</button>
+      <button className="bg-black" onClick={() => setIsOpen(true)}>
+        Import CSV
+      </button>
 
       <CSVImporter
         modalIsOpen={isOpen}

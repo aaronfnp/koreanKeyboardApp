@@ -15,8 +15,18 @@ export default function Edit({
 
   return (
     <>
-      <label>Name</label>
-      <input name="name" value={storedListInfo.name} onChange={handleChange} />
+      <label>English Title</label>
+      <input
+        name="title_en"
+        value={storedListInfo.title_en}
+        onChange={handleChange}
+      />
+      <label>Korean Title</label>
+      <input
+        name="title_kr"
+        value={storedListInfo.title_en}
+        onChange={handleChange}
+      />
       <label>User</label>
       <input name="user" value={storedListInfo.user} onChange={handleChange} />
       <label>Description</label>
@@ -39,6 +49,8 @@ export default function Edit({
         value={storedListInfo.themes}
         onChange={handleChange}
       />
+      <label>Link</label>
+      <input name="url" value={storedListInfo.url} onChange={handleChange} />
     </>
   );
 }

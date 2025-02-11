@@ -9,13 +9,15 @@ import Edit from "../components/Edit";
 
 const basicWordList = {
   id: 1,
-  name: "",
+  title_en: "",
+  title_kr: "",
   user: "",
   description: "",
   type: "",
   difficulty: "",
   themes: "",
   image: "",
+  url: "",
   wordList: [],
 };
 
@@ -37,7 +39,7 @@ export default function BookDisplay() {
   return (
     <div className="list-page">
       <button
-        className="mt-10 text-black"
+        className="mt-10 bg-black"
         onClick={() => setIsEditing((e) => !e)}
       >
         Edit
@@ -60,6 +62,9 @@ export default function BookDisplay() {
           />
         </>
       )}
+      <button className="bg-black" onClick={saveWordsLocally}>
+        Save Locally
+      </button>
       <CSVComponent setStoredWords={setStoredWords} />
     </div>
   );
