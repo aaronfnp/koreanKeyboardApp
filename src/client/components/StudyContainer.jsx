@@ -19,10 +19,14 @@ export default function StudyContainer({ storedWords }) {
         ))}
       </div>
 
-      <div>
-        <p>Selected: {activeType || "None"}</p>
-        {activeType === "Flashcards" && <Flashcard storedWords={storedWords} />}
-      </div>
+      {activeType && (
+        <div id="study-viewer">
+          <p>Selected: {activeType}</p>
+          {activeType === "Flashcards" && (
+            <Flashcard storedWords={storedWords} />
+          )}
+        </div>
+      )}
     </>
   );
 }

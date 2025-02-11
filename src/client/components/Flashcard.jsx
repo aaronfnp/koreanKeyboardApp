@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 
 export default function Flashcard({ storedWords }) {
@@ -13,23 +12,27 @@ export default function Flashcard({ storedWords }) {
   function prevCard() {
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : storedWords.length - 1));
   }
+
   return (
-    storedWords[currentIndex] && (
-      <div>
+    storedWords.length > 0 && (
+      <div id="flashcard-container">
         <button onClick={prevCard}>
-          <ArrowLeftIcon className="w-6 h-6 text-gray-700" />
+          <ArrowLeftIcon className="w-8 h-8 text-gray-700" />
         </button>
 
         <div
           className={`card ${flip ? "flip" : ""}`}
           onClick={() => setFlip(!flip)}
         >
-          <div className="front">{storedWords[currentIndex].korean}</div>
-          <div className="back">{storedWords[currentIndex].english}</div>
+          <div className="front">
+            {flip
+              ? storedWords[currentIndex].english
+              : storedWords[currentIndex].korean}
+          </div>
         </div>
 
         <button onClick={nextCard}>
-          <ArrowRightIcon className="w-6 h-6 text-gray-700" />
+          <ArrowRightIcon className="w-8 h-8 text-gray-700" />
         </button>
       </div>
     )
