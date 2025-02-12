@@ -5,9 +5,10 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import CSVComponent from "../components/CSVComponent";
 import Edit from "../components/Edit";
 import StudyContainer from "../components/StudyContainer";
+import useBooks from "../../hooks/useBook";
 
-const basicWordList = {
-  id: 1,
+const bookSchema = {
+  bookId: "1",
   title_en: "",
   title_kr: "",
   author: "",
@@ -23,13 +24,35 @@ const basicWordList = {
 export default function BookDisplay() {
   const [mode, setMode] = useState("viewing"); // "viewing" | "editing" | "studying"
   const [storedWords, setStoredWords] = useState([]);
-  const [storedListInfo, setStoredListInfo] = useState(basicWordList);
+  const [storedListInfo, setStoredListInfo] = useState(bookSchema);
   const { saveWordsLocally, removeLocalWordList } = useLocalStorage(
     storedWords,
     storedListInfo,
     setStoredWords,
     setStoredListInfo
   );
+
+  const { addBook } = useBooks(); // Access addBook function from useBooks hook
+
+  const handleStoredListInfoChange = (e) => {
+    const { name, value } = e.target;
+    setStoredListInfo((prevInfo) => ({
+      ...prevInfo,
+      [name]: value,
+    }));
+  };
+
+  const handleNewBookSubmit = (e) => {
+    e.preventDefault();
+
+    // bookID Expects string
+    const newBook = {
+      ...storedListInfo,
+      bookId: String(storedListInfo.bookId),
+    };
+
+    addBook(newBook);
+  };
 
   if (!storedListInfo) return <p>List not found</p>;
 
@@ -59,6 +82,12 @@ export default function BookDisplay() {
           setStoredListInfo={setStoredListInfo}
         />
       )}
+
+      {/* New Book Form */}
+      <form onSubmit={handleNewBookSubmit}>
+        <h3>Add a New Book</h3>
+        <button type="submit">Add Book</button>
+      </form>
 
       <div>
         <button onClick={saveWordsLocally}>Save Locally</button>
