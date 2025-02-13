@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Typing from "./pages/Typing";
 import Header from "./components/Header";
 import SearchPage from "./pages/Search";
+import CreatePage from "./pages/CreatePage";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/typing" element={<Typing />} />
-        {/* Add more routes as needed */}
+        <Route path="/addbook" element={<CreatePage />} />
       </Routes>
     </div>
   );

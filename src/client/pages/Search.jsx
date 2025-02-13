@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useSearch from "../../hooks/useSearch";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchPage() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
   const { searchResults, loading, error, searchGoogleAPI } = useSearch();
-  const [inputValue, setInputValue] = useState(query);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (query) {
       searchGoogleAPI(query);
     }
   }, [query]);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (inputValue.trim()) {
-      searchGoogleAPI(inputValue);
-    }
-  };
 
   return (
     <div>
@@ -44,6 +39,9 @@ export default function SearchPage() {
           </li>
         ))}
       </ul>
+      <p>Show More</p>
+      <p>If your search is not in the system, feel free to add it!</p>
+      <button onClick={() => navigate(`/addBook`)}>Add Book</button>
     </div>
   );
 }
