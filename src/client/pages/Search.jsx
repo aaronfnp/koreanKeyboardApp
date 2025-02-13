@@ -1,30 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import useSearch from "../../hooks/useSearch";
 
 export default function SearchPage() {
-  const [query, setQuery] = useState("");
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("query") || "";
   const { searchResults, loading, error, searchGoogleAPI } = useSearch();
+  const [inputValue, setInputValue] = useState(query);
+
+  useEffect(() => {
+    if (query) {
+      searchGoogleAPI(query);
+    }
+  }, [query]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (query.trim()) {
-      searchGoogleAPI(query);
+    if (inputValue.trim()) {
+      searchGoogleAPI(inputValue);
     }
   };
 
   return (
     <div>
-      <div className="mt-20"></div>
-      <h2>Search Books</h2>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Enter book title"
-        />
-        <button type="submit">Search</button>
-      </form>
+      <h2 className="mt-20"></h2>
 
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}

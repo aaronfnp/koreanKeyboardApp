@@ -79,9 +79,10 @@ export default function Header() {
     setSearchValue(e.target.value);
   }
 
-  function handleClick(value) {
-    if (value.trim()) {
-      navigate(`/search?query=${encodeURIComponent(value)}`);
+  function handleSearch(e) {
+    e.preventDefault();
+    if (searchValue.trim()) {
+      navigate(`/search?query=${encodeURIComponent(searchValue)}`);
     }
   }
 
@@ -128,11 +129,11 @@ export default function Header() {
           </Link>
           <input
             value={searchValue}
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => setSearchValue(e.target.value)}
             placeholder="Find a book!"
-            className="text-sm/6 font-semibold text-white"
+            className="text-sm font-semibold text-gray-900"
           />
-          <button onClick={() => handleClick(searchValue)}>Search</button>
+          <button onClick={handleSearch}>Search</button>
           <Popover className="relative">
             <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900">
               Browse
