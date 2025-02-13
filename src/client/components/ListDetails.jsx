@@ -1,6 +1,7 @@
 import React from "react";
 import StoredWords from "./WordList";
 import { ExampleWordList } from "./WordList";
+import useBooks from "../../hooks/useBook";
 
 const ListDetails = ({
   storedWords,
@@ -30,6 +31,11 @@ const ListDetails = ({
     },
   ];
 
+  const { books, loading, error } = useBooks(); // Use the hook to get books
+
+  if (loading) return <div>Loading books...</div>; // Show loading indicator while fetching
+  if (error) return <div>Error: {error}</div>;
+
   return (
     <main className="list-details mt-10 rounded-lg">
       <h1 className="text-3xl">{storedListInfo.title_en}</h1>
@@ -45,6 +51,12 @@ const ListDetails = ({
           </div>
         ))}
       </div>
+      <h1>Books List</h1>
+      <ul>
+        {books.map((book, index) => (
+          <li key={index}>{book.bookId}</li> // Assuming books have a 'title' property
+        ))}
+      </ul>
 
       <h3>Similar Books</h3>
       <div className="similar-books-container">
