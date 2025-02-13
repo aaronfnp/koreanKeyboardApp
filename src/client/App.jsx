@@ -16,6 +16,7 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
+        <Route path="/book/:id" element={<BookDisplay />} />
         <Route path="/" element={<BookDisplay />} />
         <Route path="/input" element={<InputContainer />} />
         <Route path="/home" element={<Home />} />
