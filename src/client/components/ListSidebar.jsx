@@ -5,7 +5,7 @@ const ListSidebar = ({ storedListInfo }) => {
     <aside className="list-sidebar">
       <div className="list-info">
         <img
-          src="https://m.media-amazon.com/images/I/715xryOoPSL._AC_UF1000,1000_QL80_.jpg"
+          src={storedListInfo.image}
           style={{ width: "200px" }}
           alt="Book Cover"
         />

@@ -26,5 +26,26 @@ export default function useSearch() {
     }
   };
 
-  return { searchResults, loading, error, searchGoogleAPI };
+  const googleIdentifierSearch = async (identifier) => {
+    if (!identifier || identifier === "null") return; // Prevent null/empty API requests
+
+    try {
+      const response = await axios.get(
+        `https://www.googleapis.com/books/v1/volumes?q=isbn:${identifier}`
+      );
+      if (response.status === 200) {
+        setSearchResults(response.data.items || []);
+      }
+    } catch (err) {
+      setError("Failed to find book.");
+    }
+  };
+
+  return {
+    searchResults,
+    loading,
+    error,
+    searchGoogleAPI,
+    googleIdentifierSearch,
+  };
 }

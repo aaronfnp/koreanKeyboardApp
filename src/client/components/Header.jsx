@@ -75,10 +75,6 @@ export default function Header() {
 
   const navigate = useNavigate();
 
-  function handleChange(e) {
-    setSearchValue(e.target.value);
-  }
-
   function handleSearch(e) {
     e.preventDefault();
     if (searchValue.trim()) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ListSidebar from "../components/ListSidebar";
 import ListDetails from "../components/ListDetails";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -6,19 +6,21 @@ import CSVComponent from "../components/CSVComponent";
 import Edit from "../components/Edit";
 import StudyContainer from "../components/StudyContainer";
 import useBooks from "../../hooks/useBook";
+import useSearch from "../../hooks/useSearch";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const bookSchema = {
-  bookId: "1",
-  title_en: "",
-  title_kr: "",
-  author: "",
-  description: "",
-  type: "",
-  difficulty: "",
-  themes: [],
-  image: "",
-  url: "",
-  wordList: [],
+  bookId: "", // Google Books ID
+  title_en: "", // English title from API
+  title_kr: "", // Korean title (if applicable OR manual entry)
+  author: "", // First author or "Multiple Authors"
+  description: "", // Book summary
+  type: "BOOK", // Default type
+  difficulty: "", // Manual entry or inferred later
+  themes: [], // Could extract from categories
+  image: "", // Thumbnail URL
+  url: "", // Google Books link
+  wordList: [], // Will be populated later
 };
 
 export default function BookDisplay() {
@@ -32,20 +34,54 @@ export default function BookDisplay() {
     setStoredListInfo
   );
 
-  const { addBook } = useBooks(); // Access addBook function from useBooks hook
+  const { googleIdentifierSearch, searchResults, loading } = useSearch();
+  const { addBook } = useBooks();
+  const { id } = useParams();
 
-  const handleStoredListInfoChange = (e) => {
-    const { name, value } = e.target;
-    setStoredListInfo((prevInfo) => ({
-      ...prevInfo,
-      [name]: value,
-    }));
+  useEffect(() => {
+    const fetchBook = async () => {
+      await googleIdentifierSearch(id); // Using router's "id" param, maybe rename to identifier due to google id != identifier 
+    };
+
+    if (id) {
+      fetchBook();
+    }
+  }, [id]);
+
+  // Updates storedListInfo after searchResults is updated
+  useEffect(() => {
+    const updateStoredListInfo = async () => {
+      if (searchResults.length > 0) {
+        console.log(searchResults[0].volumeInfo);
+        const extractedData = extractBookData(searchResults[0]); 
+        setStoredListInfo(extractedData);
+      }
+    };
+
+    updateStoredListInfo();
+  }, [searchResults]);
+
+  const extractBookData = (book) => {
+    return {
+      bookId: book.id || "", // Google Books ID
+      title_en: book.volumeInfo?.title || "Unknown Title",
+      title_kr: "", // Can be manually assigned later
+      author: book.volumeInfo?.authors
+        ? book.volumeInfo.authors.join(", ")
+        : "Unknown Author",
+      description: book.volumeInfo?.description || "No description available.",
+      type: book.volumeInfo?.printType || "BOOK", //  Can be manually re-assigned later if manga
+      difficulty: "", // Can be manually assigned later
+      themes: book.volumeInfo?.categories || [], 
+      image: book.volumeInfo?.imageLinks?.thumbnail || "", 
+      url: book.volumeInfo?.infoLink || "", // Uses google api for info, but maybe buylink later?
+      wordList: [], // Will be populated later
+    };
   };
 
   const handleNewBookSubmit = (e) => {
     e.preventDefault();
 
-    // bookID Expects string
     const newBook = {
       ...storedListInfo,
       bookId: String(storedListInfo.bookId),
@@ -54,7 +90,9 @@ export default function BookDisplay() {
     addBook(newBook);
   };
 
-  if (!storedListInfo) return <p>List not found</p>;
+  if (loading) return <p>Loading...</p>;
+  if (!storedListInfo || storedListInfo.bookId === "1")
+    return <p>List not found</p>;
 
   return (
     <div className="list-page">
