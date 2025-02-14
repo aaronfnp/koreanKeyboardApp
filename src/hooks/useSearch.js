@@ -41,11 +41,32 @@ export default function useSearch() {
     }
   };
 
+  const findIdentifier = async (book) => {
+    const identifiers =
+      book.industryIdentifiers || book.volumeInfo?.industryIdentifiers || [];
+
+    // Tries to get ISBN_13 and ISBN_10
+    const isbn13 = identifiers.find((id) => id.type === "ISBN_13")?.identifier;
+    const isbn10 = identifiers.find((id) => id.type === "ISBN_10")?.identifier;
+
+    // If the book has an identifier with type "OTHER", use that as a fallback
+    const otherIdentifier = identifiers.find(
+      (id) => id.type === "OTHER"
+    )?.identifier;
+
+    // If no ISBN found, fallback to "OTHER" or alert
+    const bookId =
+      isbn13 || isbn10 || otherIdentifier || book.title + book.publishedDate;
+
+    return bookId;
+  };
+
   return {
     searchResults,
     loading,
     error,
     searchGoogleAPI,
     googleIdentifierSearch,
+    findIdentifier,
   };
 }

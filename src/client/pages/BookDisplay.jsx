@@ -3,15 +3,15 @@ import ListSidebar from "../components/ListSidebar";
 import ListDetails from "../components/ListDetails";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import CSVComponent from "../components/CSVComponent";
-import Edit from "../components/Edit";
+import BookForm from "../components/BookForm";
 import StudyContainer from "../components/StudyContainer";
-import useBooks from "../../hooks/useBook";
 import useSearch from "../../hooks/useSearch";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const bookSchema = {
   bookId: "", // Google Books ID
   isFromGoogleAPI: false,
+  identifier: "", // Uses isbn or whatever else available
   title_en: "", // English title from API
   title_kr: "", // Korean title (if applicable OR manual entry)
   author: "", // First author or "Multiple Authors"
@@ -38,7 +38,6 @@ export default function BookDisplay() {
   );
 
   const { googleIdentifierSearch, searchResults, loading } = useSearch();
-  const { addBook } = useBooks();
   const { id } = useParams();
 
   useEffect(() => {
@@ -85,17 +84,6 @@ export default function BookDisplay() {
     };
   };
 
-  const handleNewBookSubmit = (e) => {
-    e.preventDefault();
-
-    const newBook = {
-      ...storedListInfo,
-      bookId: String(storedListInfo.bookId),
-    };
-
-    addBook(newBook);
-  };
-
   if (loading) return <p>Loading...</p>;
   if (!storedListInfo || storedListInfo.bookId === "1")
     return <p>List not found</p>;
@@ -105,11 +93,18 @@ export default function BookDisplay() {
       <ListSidebar storedListInfo={storedListInfo} />
 
       {mode === "editing" ? (
-        <Edit
-          storedWords={storedWords}
+        <BookForm
+          mode="edit"
           storedListInfo={storedListInfo}
-          setStoredWords={setStoredWords}
           setStoredListInfo={setStoredListInfo}
+          setMode={setMode}
+        />
+      ) : mode === "suggesting" ? (
+        <BookForm
+          mode="suggestThemes"
+          storedListInfo={storedListInfo}
+          setStoredListInfo={setStoredListInfo}
+          setMode={setMode}
         />
       ) : mode === "studying" ? (
         <StudyContainer
@@ -127,16 +122,14 @@ export default function BookDisplay() {
         />
       )}
 
-      {/* New Book Form */}
-      <form onSubmit={handleNewBookSubmit}>
-        <h3>Add a New Book</h3>
-        <button type="submit">Add Book</button>
-      </form>
-
       <div>
-        <button onClick={saveWordsLocally}>Save Locally</button>
+        {/* <button onClick={saveWordsLocally}>Save Locally</button> */}
         <CSVComponent setStoredWords={setStoredWords} />
-        <button onClick={() => setMode("editing")}>Edit</button>
+        {storedListInfo.isFromGoogleAPI ? (
+          <button onClick={() => setMode("suggesting")}>Suggest Themes</button>
+        ) : (
+          <button onClick={() => setMode("editing")}>Edit</button>
+        )}
         <button onClick={() => setMode("studying")}>Study</button>
         <button onClick={() => setMode("viewing")}>View</button>
       </div>

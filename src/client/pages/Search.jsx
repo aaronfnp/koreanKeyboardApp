@@ -6,7 +6,8 @@ import { useNavigate, Link } from "react-router-dom";
 export default function SearchPage() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
-  const { searchResults, loading, error, searchGoogleAPI } = useSearch();
+  const { searchResults, loading, error, searchGoogleAPI, findIdentifier } =
+    useSearch();
 
   const navigate = useNavigate();
 
@@ -16,24 +17,8 @@ export default function SearchPage() {
     }
   }, [query]);
 
-  function viewBook(book) {
-    const identifiers =
-      book.industryIdentifiers || book.volumeInfo?.industryIdentifiers || [];
-
-    // Tries to get ISBN_13 and ISBN_10
-    const isbn13 = identifiers.find((id) => id.type === "ISBN_13")?.identifier;
-    const isbn10 = identifiers.find((id) => id.type === "ISBN_10")?.identifier;
-
-    // If the book has an identifier with type "OTHER", use that as a fallback
-    const otherIdentifier = identifiers.find(
-      (id) => id.type === "OTHER"
-    )?.identifier;
-
-    // If no ISBN found, fallback to "OTHER" or alert
-    const bookId =
-      isbn13 || isbn10 || otherIdentifier || book.title + book.publishedDate;
-
-    // Navigate using the found identifier
+  async function viewBook(book) {
+    const bookId = await findIdentifier(book);
     navigate(`/book/${bookId}`);
   }
 
