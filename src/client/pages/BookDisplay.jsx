@@ -19,7 +19,8 @@ const bookSchema = {
   publishedDate: "", // Date if available
   type: "BOOK", // Default type
   difficulty: "", // Manual entry or inferred later
-  themes: [], // Could extract from categories
+  googleCategories: [], // Could extract from categories
+  userThemes: [], // Users will input suggested themes
   image: "", // Thumbnail URL
   url: "", // Google Books link
   wordList: [], // Will be populated later
@@ -76,7 +77,8 @@ export default function BookDisplay() {
       publishedDate: book.volumeInfo?.publishedDate, // Date if available
       type: book.volumeInfo?.printType || "BOOK", //  Can be manually re-assigned later if manga
       difficulty: "", // Can be manually assigned later
-      themes: book.volumeInfo?.categories || [],
+      googleCategories: book.volumeInfo?.categories || [],
+      userThemes: "",
       image: book.volumeInfo?.imageLinks?.thumbnail || "",
       url: book.volumeInfo?.infoLink || "", // Uses google api for info, but maybe buylink later?
       wordList: [], // Will be populated later

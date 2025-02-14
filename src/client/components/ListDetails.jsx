@@ -38,7 +38,7 @@ const ListDetails = ({
 
       <h3>Categories</h3>
       <div>
-        {storedListInfo.themes.map((t, index) => (
+        {storedListInfo.googleCategories.map((t, index) => (
           <div key={index} className="theme-item">
             <p>{t}</p>
           </div>
