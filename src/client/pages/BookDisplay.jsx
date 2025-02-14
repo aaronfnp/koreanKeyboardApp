@@ -11,10 +11,12 @@ import { useParams, useSearchParams } from "react-router-dom";
 
 const bookSchema = {
   bookId: "", // Google Books ID
+  isFromGoogleAPI: false,
   title_en: "", // English title from API
   title_kr: "", // Korean title (if applicable OR manual entry)
   author: "", // First author or "Multiple Authors"
   description: "", // Book summary
+  publishedDate: "", // Date if available
   type: "BOOK", // Default type
   difficulty: "", // Manual entry or inferred later
   themes: [], // Could extract from categories
@@ -40,7 +42,7 @@ export default function BookDisplay() {
 
   useEffect(() => {
     const fetchBook = async () => {
-      await googleIdentifierSearch(id); // Using router's "id" param, maybe rename to identifier due to google id != identifier 
+      await googleIdentifierSearch(id); // Using router's "id" param, maybe rename to identifier due to google id != identifier
     };
 
     if (id) {
@@ -53,7 +55,7 @@ export default function BookDisplay() {
     const updateStoredListInfo = async () => {
       if (searchResults.length > 0) {
         console.log(searchResults[0].volumeInfo);
-        const extractedData = extractBookData(searchResults[0]); 
+        const extractedData = extractBookData(searchResults[0]);
         setStoredListInfo(extractedData);
       }
     };
@@ -64,16 +66,18 @@ export default function BookDisplay() {
   const extractBookData = (book) => {
     return {
       bookId: book.id || "", // Google Books ID
+      isFromGoogleAPI: true, // extracting sets to true, if not default is false
       title_en: book.volumeInfo?.title || "Unknown Title",
       title_kr: "", // Can be manually assigned later
       author: book.volumeInfo?.authors
         ? book.volumeInfo.authors.join(", ")
         : "Unknown Author",
       description: book.volumeInfo?.description || "No description available.",
+      publishedDate: book.volumeInfo?.publishedDate, // Date if available
       type: book.volumeInfo?.printType || "BOOK", //  Can be manually re-assigned later if manga
       difficulty: "", // Can be manually assigned later
-      themes: book.volumeInfo?.categories || [], 
-      image: book.volumeInfo?.imageLinks?.thumbnail || "", 
+      themes: book.volumeInfo?.categories || [],
+      image: book.volumeInfo?.imageLinks?.thumbnail || "",
       url: book.volumeInfo?.infoLink || "", // Uses google api for info, but maybe buylink later?
       wordList: [], // Will be populated later
     };

@@ -14,6 +14,7 @@ const ListSidebar = ({ storedListInfo }) => {
           {storedListInfo.title_kr ? ` / ${storedListInfo.title_kr}` : ""}
         </h2>
         <p className="text-black">Author: {storedListInfo.author}</p>
+        <p className="text-black">Author: {storedListInfo.publishedDate}</p>
         <button>Want to Study</button>
         <div className="rating">⭐⭐⭐⭐☆</div>
         <a href={storedListInfo.url} target="_blank" rel="noopener noreferrer">
