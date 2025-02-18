@@ -130,7 +130,7 @@ export default function BookDisplay() {
         ) : (
           <button onClick={() => setMode("editing")}>Edit</button>
         )}
-        <button onClick={() => setMode("studying")}>Study</button>
+        {storedWords.length > 1 && <button onClick={() => setMode("studying")}>Study</button>}
         <button onClick={() => setMode("viewing")}>View</button>
       </div>
     </div>
