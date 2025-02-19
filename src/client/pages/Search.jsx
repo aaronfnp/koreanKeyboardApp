@@ -13,6 +13,7 @@ export default function SearchPage() {
 
   useEffect(() => {
     if (query) {
+      // Search DynamoDB
       searchGoogleAPI(query);
     }
   }, [query]);

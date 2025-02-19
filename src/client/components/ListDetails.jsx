@@ -34,7 +34,7 @@ const ListDetails = ({
       <h1 className="text-3xl">{storedListInfo.title_en}</h1>
       <h2>{storedListInfo.title_kr ? `${storedListInfo.title_kr}` : ""}</h2>
       <h3>Description</h3>
-      <p>{storedListInfo.description || "No description available"}</p>
+      <p className="max-h-30 overflow-hidden">{storedListInfo.description || "No description available"}</p>
 
       <h3>Categories</h3>
       <div>
